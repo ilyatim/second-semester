@@ -1,16 +1,24 @@
-CC=g++
-CFLAGS=-c -Wall -IC:\SFML-2.4.2\include\ -LSFML_STATIC
-#-Iпутькinclude
-LDFLAGS=-LC:\SFML-2.4.2\lib\ -Lsfml-graphics-s.lib -Lsfml-window-s.lib -Lsfml-system-s.lib
-#-Lпутькlib -lбиб1 -lбиб2
-SOURCES=testwindow.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=mario
+#include <SFML/Graphics.hpp>
+using namespace sf;
+int main()
+{
+    RenderWindow window(VideoMode(200, 200), "SFML works!");
+    CircleShape shape(100.f);
+    shape.setFillColor(Color::Green);
 
-all: $(SOURCES) $(EXECUTABLE)
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+                window.close();
+        }
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+        window.clear();
+        window.draw(shape);
+        window.display();
+    }
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+    return 0;
+}
