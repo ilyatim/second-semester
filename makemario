@@ -1,0 +1,16 @@
+CC=g++
+CFLAGS=-c -Wall -IC:\SFML-2.4.2\include\ -LSFML_STATIC
+#-Iпутькinclude
+LDFLAGS=-LC:\SFML-2.4.2\lib\ -Lsfml-graphics-s.lib -Lsfml-window-s.lib -Lsfml-system-s.lib
+#-Lпутькlib -lбиб1 -lбиб2
+SOURCES=testwindow.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=mario
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
