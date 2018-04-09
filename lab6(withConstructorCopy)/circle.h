@@ -9,7 +9,9 @@ class Circle: public Figure
 public:
   std::tuple <int, int, int> pCircle;
   Circle();
-  Circle(std::tuple <int, int, int> Circle);
+  Circle(int, int, int);
+  Circle(const Circle &other);
   virtual ~Circle();
 };
 #endif
+
