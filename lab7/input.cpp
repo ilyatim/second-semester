@@ -73,8 +73,7 @@ bool input(Graph &graph)
       fromfile.open(name);
       if(fromfile.is_open())
       {
-        //graph graph1;
-        //fromfile.read((char*)&graph, sizeof(graph1));
+        fromfile.read((char*)&graph, sizeof(graph));
       }
       fromfile.close();
       break;
