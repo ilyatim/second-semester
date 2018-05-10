@@ -1,15 +1,15 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-class vertex
+class Vertex
 {
 private:
   std::string name;
 public:
-  vertex(std::string _name);
+  Vertex(std::string _name);
   std::string getName();
   void setName(std::string _name);
-  virtual ~vertex();
+  virtual ~Vertex();
 
 };
 

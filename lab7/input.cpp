@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstring>
+#include <fstream>
 #include "input.h"
 
 using namespace std;
-bool input(graph &graph)
+bool input(Graph &graph)
 {
   inform();
   int choice;
@@ -65,10 +66,31 @@ bool input(graph &graph)
     }
     case 7:
     {
+      cout << "specify the path to the file in which you want to save the graph" << endl;
+      string name;
+      cin >> name;
+      ifstream fromfile;
+      fromfile.open(name);
+      if(fromfile.is_open())
+      {
+        //graph graph1;
+        //fromfile.read((char*)&graph, sizeof(graph1));
+      }
+      fromfile.close();
       break;
     }
     case 8:
     {
+      cout << "specify the path to the file in which you want to save the graph" << endl;
+      string name;
+      cin >> name;
+      ofstream infile;
+      infile.open(name);
+      if(infile.is_open())
+      {
+        infile.write((char*)&graph, sizeof(graph));
+      }
+      infile.close();
       break;
     }
     case 9:

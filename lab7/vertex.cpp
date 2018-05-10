@@ -4,19 +4,19 @@
 
 using namespace std;
 
-vertex::vertex(string _name)
+Vertex::Vertex(string _name)
 {
   name = _name;
 }
-string vertex::getName()
+string Vertex::getName()
 {
   return name;
 }
-void vertex::setName(string _name)
+void Vertex::setName(string _name)
 {
   name = _name;
 }
-vertex::~vertex()
+Vertex::~Vertex()
 {
 
 }

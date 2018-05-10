@@ -4,12 +4,12 @@
 
 using namespace std;
 
-graph::graph()
+Graph::Graph()
 {
 
 }
 //////////////////////////////////////
-bool graph::noExistingVertex(string name)
+bool Graph::noExistingVertex(string name)
 {
   for(unsigned int i = 0; i < _vertex.size(); i++)
   {
@@ -21,7 +21,7 @@ bool graph::noExistingVertex(string name)
   return true;
 }
 //////////////////////////////////////
-bool graph::notBusyArc(tuple <string, string, string> name)
+bool Graph::notBusyArc(tuple <string, string, string> name)
 {
   for(unsigned int i = 0; i < _arc.size(); i++)
   {
@@ -33,7 +33,7 @@ bool graph::notBusyArc(tuple <string, string, string> name)
   return true;
 }
 //////////////////////////////////////
-bool graph::noExistingArc(tuple <string, string, string> name)
+bool Graph::noExistingArc(tuple <string, string, string> name)
 {
   for(unsigned int i = 0; i < _arc.size(); i++)
   {
@@ -45,11 +45,11 @@ bool graph::noExistingArc(tuple <string, string, string> name)
   return true;
 }
 //////////////////////////////////////
-void graph::addVertex(string name)
+void Graph::addVertex(string name)
 {
   if(noExistingVertex(name))
   {
-    _vertex.push_back(vertex(name));
+    _vertex.push_back(Vertex(name));
   }
   else
   {
@@ -57,7 +57,7 @@ void graph::addVertex(string name)
   }
 }
 //////////////////////////////////////
-void graph::renameVertex(string first_name, string second_name)
+void Graph::renameVertex(string first_name, string second_name)
 {
   if(noExistingVertex(first_name))
   {
@@ -90,7 +90,7 @@ void graph::renameVertex(string first_name, string second_name)
   }
 }
 //////////////////////////////////////
-void graph::printAllVertex()
+void Graph::printAllVertex()
 {
   if (!(_vertex.size()))
   {
@@ -108,7 +108,7 @@ void graph::printAllVertex()
   }
 }
 //////////////////////////////////////
-void graph::deleteVertex(string name)
+void Graph::deleteVertex(string name)
 {
   if(noExistingVertex(name))
   {
@@ -135,12 +135,12 @@ void graph::deleteVertex(string name)
   }
 }
 //////////////////////////////////////
-void graph::addArc(string name1, string name2, string name)
+void Graph::addArc(string name1, string name2, string name)
 {
   auto _tuple = make_tuple(name1, name2, name);
   if(notBusyArc(_tuple) && !(noExistingVertex(name1)) && !(noExistingVertex(name2)))
   {
-    _arc.push_back(arc(_tuple));
+    _arc.push_back(Arc(_tuple));
   }
   else
   {
@@ -150,7 +150,7 @@ void graph::addArc(string name1, string name2, string name)
   }
 }
 //////////////////////////////////////
-void graph::deleteArc(string name1, string name2, string name3)
+void Graph::deleteArc(string name1, string name2, string name3)
 {
   auto _tuple = make_tuple(name1, name2, name3);
   if((noExistingArc(_tuple)))
@@ -167,7 +167,7 @@ void graph::deleteArc(string name1, string name2, string name3)
   }
 }
 //////////////////////////////////////
-void graph::outgoingArcs(string name)
+void Graph::outgoingArcs(string name)
 {
   if(!(noExistingVertex(name)))
   {
@@ -193,7 +193,7 @@ void graph::outgoingArcs(string name)
   }
 }
 //////////////////////////////////////
-void graph::ingoingArcs(string name)
+void Graph::ingoingArcs(string name)
 {
   if(!(noExistingVertex(name)))
   {
@@ -219,17 +219,17 @@ void graph::ingoingArcs(string name)
   }
 }
 //////////////////////////////////////
-//        ostream & operator<<(ostream & os, graph & graph)
+//        ostream & operator<<(ostream & os, Graph & Graph)
 //        {
-//          os << graph._vertex.size() << endl;
-//          for(unsigned int i = 0; i < graph._vertex.size(); i++)
+//          os << Graph._vertex.size() << endl;
+//          for(unsigned int i = 0; i < Graph._vertex.size(); i++)
 //          {
-//            os << graph._vertex[i].getName() << " ";
+//            os << Graph._vertex[i].getName() << " ";
 //          }
 //          return os;
 //        }
 //////////////////////////////////////
-graph::~graph()
+Graph::~Graph()
 {
 
 }

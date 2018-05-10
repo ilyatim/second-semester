@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-  graph graph;
+  Graph graph;
   while(input(graph))
   {
 

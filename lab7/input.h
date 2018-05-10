@@ -3,6 +3,6 @@
 #include "inform.h"
 #include "graph.h"
 
-bool input(graph &graph);
+bool input(Graph &graph);
 
 #endif
