@@ -16,6 +16,8 @@ private:
 
 public:
   Graph();
+  Graph & operator=(const Graph & graph);
+  Graph(const Graph &graph);
   void addVertex(std::string name);
   void renameVertex(std::string first_name, std::string second_name);
   void printAllVertex();

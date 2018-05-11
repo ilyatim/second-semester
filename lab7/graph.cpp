@@ -9,6 +9,19 @@ Graph::Graph()
 
 }
 //////////////////////////////////////
+Graph & Graph::operator =(const Graph & graph)
+{
+    _vertex.clear();
+    _vertex = graph._vertex;
+    return *this;
+}
+//////////////////////////////////////
+Graph::Graph(const Graph &graph)
+{
+    _vertex.clear();
+    _vertex = graph._vertex;
+}
+//////////////////////////////////////
 bool Graph::noExistingVertex(string name)
 {
   for(unsigned int i = 0; i < _vertex.size(); i++)
