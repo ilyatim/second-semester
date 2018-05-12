@@ -44,9 +44,12 @@ bool input(Graph &graph)
     }
     case 5:
     {
-      cout << "specify two vertices between which you want to draw an arc" << endl;
       string name1,name2;
-      cin >> name1 >> name2;
+      cout << "specify two vertices between which you want to draw an arc" << endl;
+      cout << "enter the vertex from which you want to draw the arc" << endl;
+      cin >> name1;
+      cout << "enter the vertex to which you want to draw the arc" << endl;
+      cin >> name2;
       cout << "enter the name of arc" << endl;
       string arc;
       cin >> arc;

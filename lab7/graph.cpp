@@ -38,7 +38,9 @@ bool Graph::notBusyArc(tuple <string, string, string> name)
 {
   for(unsigned int i = 0; i < _arc.size(); i++)
   {
-    if(((_arc[i].getTuple0() == get<0>(name)) && (_arc[i].getTuple1() == get<1>(name))) || (_arc[i].getTuple2() == get<2>(name)))
+    if(((_arc[i].getTuple0() == get<0>(name)) && (_arc[i].getTuple1() == get<1>(name))) ||
+        (_arc[i].getTuple2() == get<2>(name)) ||
+       ((_arc[i].getTuple0() == get<1>(name)) && (_arc[i].getTuple1() == get<0>(name))))
     {
       return false;
     }
@@ -158,7 +160,7 @@ void Graph::addArc(string name1, string name2, string name)
   else
   {
     cout << endl;
-    cout << "arc from such vertices either exists or cannot be created" << endl;
+    cout << "arc from such vertices either exists or cannot be created because a vertex with this name already exists" << endl;
     cout << "check the correctness of the input data" << endl;
   }
 }
