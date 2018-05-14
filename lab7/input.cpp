@@ -69,30 +69,30 @@ bool input(Graph &graph)
     }
     case 7:
     {
-      cout << "specify the path to the file in which you want to save the graph" << endl;
+      cout << "enter the name of the file from which to load the graph" << endl;
       string name;
       cin >> name;
-      ifstream fromfile;
-      fromfile.open(name);
-      if(fromfile.is_open())
+      ifstream from_a_file;
+      from_a_file.open(name);
+      if(from_a_file.is_open())
       {
-        fromfile >> graph;
+        from_a_file >> graph;
       }
-      fromfile.close();
+      from_a_file.close();
       break;
     }
     case 8:
     {
-      cout << "specify the path to the file in which you want to save the graph" << endl;
+      cout << "enter the name of the file in which to load the graph" << endl;
       string name;
       cin >> name;
-      ofstream ofF;
-      ofF.open(name);
-      if(ofF.is_open())
+      ofstream into_a_file;
+      into_a_file.open(name);
+      if(into_a_file.is_open())
       {
-        ofF << graph;
+        into_a_file << graph;
       }
-      ofF.close();
+      into_a_file.close();
       break;
     }
     case 9:
