@@ -76,7 +76,7 @@ bool input(Graph &graph)
       fromfile.open(name);
       if(fromfile.is_open())
       {
-        fromfile.read((char*)&graph, sizeof(graph));
+        fromfile >> graph;
       }
       fromfile.close();
       break;
@@ -86,13 +86,13 @@ bool input(Graph &graph)
       cout << "specify the path to the file in which you want to save the graph" << endl;
       string name;
       cin >> name;
-      ofstream infile;
-      infile.open(name);
-      if(infile.is_open())
+      ofstream ofF;
+      ofF.open(name);
+      if(ofF.is_open())
       {
-        infile.write((char*)&graph, sizeof(graph));
+        ofF << graph;
       }
-      infile.close();
+      ofF.close();
       break;
     }
     case 9:

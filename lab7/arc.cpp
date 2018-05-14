@@ -5,32 +5,31 @@
 
 using namespace std;
 
-Arc::Arc(tuple <string, string, string> _tuple)
+Arc::Arc(string name_1, string name_2, string name_of_arc)
 {
-    arc_ = _tuple;
+    nameVertexInitial = name_1;
+    nameVertexFinal = name_2;
+    nameArc = name_of_arc;
 }
-string Arc::getTuple0()
+string Arc::getName1()
 {
-  string arc1 = get<0>(arc_);
-  return arc1;
+  return nameVertexInitial;
 }
-string Arc::getTuple1()
+string Arc::getName2()
 {
-  string arc1 = get<1>(arc_);
-  return arc1;
+  return nameVertexFinal;
 }
-string Arc::getTuple2()
+string Arc::getName3()
 {
-  string arc1 = get<2>(arc_);
-  return arc1;
+  return nameArc;
 }
-void Arc::setTuple0(string name)
+void Arc::setName1(string name)
 {
-  get<0>(arc_) = name;
+  nameVertexInitial = name;
 }
-void Arc::setTuple1(string name)
+void Arc::setName2(string name)
 {
-  get<1>(arc_) = name;
+  nameVertexFinal = name;
 }
 Arc::~Arc()
 {

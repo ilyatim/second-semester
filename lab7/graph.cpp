@@ -34,13 +34,13 @@ bool Graph::noExistingVertex(string name)
   return true;
 }
 //////////////////////////////////////
-bool Graph::notBusyArc(tuple <string, string, string> name)
+bool Graph::notBusyArc(string name1, string name2, string name3)
 {
   for(unsigned int i = 0; i < _arc.size(); i++)
   {
-    if(((_arc[i].getTuple0() == get<0>(name)) && (_arc[i].getTuple1() == get<1>(name))) ||
-        (_arc[i].getTuple2() == get<2>(name)) ||
-       ((_arc[i].getTuple0() == get<1>(name)) && (_arc[i].getTuple1() == get<0>(name))))
+    if(((_arc[i].getName1() == name1) && (_arc[i].getName2() == name2)) ||
+        (_arc[i].getName3() == name3) ||
+       ((_arc[i].getName1() == name2) && (_arc[i].getName2() == name1)))
     {
       return false;
     }
@@ -48,11 +48,11 @@ bool Graph::notBusyArc(tuple <string, string, string> name)
   return true;
 }
 //////////////////////////////////////
-bool Graph::noExistingArc(tuple <string, string, string> name)
+bool Graph::noExistingArc(string name1, string name2, string name3)
 {
   for(unsigned int i = 0; i < _arc.size(); i++)
   {
-    if((_arc[i].getTuple0() == get<0>(name)) && (_arc[i].getTuple1() == get<1>(name)) && (_arc[i].getTuple2() == get<2>(name)))
+    if((_arc[i].getName1() == name1) && (_arc[i].getName2() == name2) && (_arc[i].getName3() == name3))
     {
       return false;
     }
@@ -94,10 +94,10 @@ void Graph::renameVertex(string first_name, string second_name)
           _vertex[i].setName(second_name);
           for(unsigned int j = 0; j < _arc.size(); j++)
           {
-            if(_arc[j].getTuple0() == first_name)
-              _arc[j].setTuple0(second_name);
-            if(_arc[j].getTuple1() == first_name)
-              _arc[j].setTuple1(second_name);
+            if(_arc[j].getName1() == first_name)
+              _arc[j].setName1(second_name);
+            if(_arc[j].getName2() == first_name)
+              _arc[j].setName2(second_name);
           }
         }
       }
@@ -140,22 +140,20 @@ void Graph::deleteVertex(string name)
     _vertex.pop_back();
     for(i = 0; i < _arc.size(); i++)
     {
-      if((_arc[i].getTuple0() == name) || (_arc[i].getTuple1() == name))
+      if((_arc[i].getName1() == name) || (_arc[i].getName2() == name))
       {
         _arc[i] = _arc[_arc.size() - 1];
         _arc.pop_back();
       }
-
     }
   }
 }
 //////////////////////////////////////
-void Graph::addArc(string name1, string name2, string name)
+void Graph::addArc(string name1, string name2, string name3)
 {
-  auto _tuple = make_tuple(name1, name2, name);
-  if(notBusyArc(_tuple) && !(noExistingVertex(name1)) && !(noExistingVertex(name2)))
+  if(notBusyArc(name1, name2, name3) && !(noExistingVertex(name1)) && !(noExistingVertex(name2)))
   {
-    _arc.push_back(Arc(_tuple));
+    _arc.push_back(Arc(name1, name2, name3));
   }
   else
   {
@@ -167,13 +165,12 @@ void Graph::addArc(string name1, string name2, string name)
 //////////////////////////////////////
 void Graph::deleteArc(string name1, string name2, string name3)
 {
-  auto _tuple = make_tuple(name1, name2, name3);
-  if((noExistingArc(_tuple)))
+  if((noExistingArc(name1, name2, name3)))
     cout << "not exist" << endl;
   else
   {
     unsigned int i = 0;
-    while(_arc[i].getTuple2() != name3)
+    while(_arc[i].getName3() != name3)
     {
       i++;
     }
@@ -190,10 +187,10 @@ void Graph::outgoingArcs(string name)
     int counter = 0;
     for(i = 0; i < _arc.size(); i++)
     {
-      if(_arc[i].getTuple0() == name)
+      if(_arc[i].getName1() == name)
         {
           cout << "outgoing arc " << i + 1 << " is - ";
-          cout << _arc[i].getTuple2() << endl;
+          cout << _arc[i].getName3() << endl;
           counter++;
         }
     }
@@ -216,10 +213,10 @@ void Graph::ingoingArcs(string name)
     int counter = 0;
     for(i = 0; i < _arc.size(); i++)
     {
-      if(_arc[i].getTuple1() == name)
+      if(_arc[i].getName2() == name)
         {
           cout << "ingoing arc " << i + 1 << " is - ";
-          cout << _arc[i].getTuple2() << endl;
+          cout << _arc[i].getName3() << endl;
           counter++;
         }
     }
@@ -234,15 +231,44 @@ void Graph::ingoingArcs(string name)
   }
 }
 //////////////////////////////////////
-//        ostream & operator<<(ostream & os, Graph & Graph)
-//        {
-//          os << Graph._vertex.size() << endl;
-//          for(unsigned int i = 0; i < Graph._vertex.size(); i++)
-//          {
-//            os << Graph._vertex[i].getName() << " ";
-//          }
-//          return os;
-//        }
+ostream & operator<<(ostream & os, Graph & graph)
+{
+  os << graph._vertex.size() << endl;
+  for(unsigned int i = 0; i < graph._vertex.size(); i++)
+  {
+    os << graph._vertex[i].getName() << " " ;
+  }
+  os << endl;
+  os << graph._arc.size() << endl;
+  for(unsigned int i = 0; i < graph._arc.size(); i++)
+  {
+    os << graph._arc[i].getName1() << " " << graph._arc[i].getName2() << " "  << graph._arc[i].getName3() << endl;
+  }
+  return os;
+}
+//////////////////////////////////////
+istream & operator>>(istream & is, Graph & graph)
+{
+  graph._vertex.clear();
+  graph._arc.clear();
+  unsigned int sizeVertex;
+  is >> sizeVertex;
+  for(unsigned int i = 0; i < sizeVertex; i++)
+  {
+    string name;
+    is >> name;
+    graph._vertex.push_back(Vertex(name));
+  }
+  unsigned int sizeArc;
+  is >> sizeArc;
+  for(unsigned int i = 0; i < sizeArc; i++)
+  {
+    string name1, name2, name3;
+    is >> name1 >> name2 >> name3;
+    graph._arc.push_back(Arc(name1, name2, name3));
+  }
+  return is;
+}
 //////////////////////////////////////
 Graph::~Graph()
 {
